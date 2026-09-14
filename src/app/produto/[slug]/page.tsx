@@ -1,32 +1,72 @@
-"use client";
-
 import { storeData } from "@/lib/data";
-import { useCartStore } from "@/lib/store/useCartStore";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { useState, use } from "react";
-import { Button } from "@/components/ui/Button";
+import AddToCart from "@/components/ui/AddToCart";
+import { Metadata } from "next";
 
-export default function ProdutoPage(props: { params: Promise<{ slug: string }> }) {
-  const params = use(props.params);
+export async function generateStaticParams() {
+  return storeData.products.map((product) => ({
+    slug: product.id,
+  }));
+}
+
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const product = storeData.products.find((p) => p.id === params.slug);
+
+  if (!product) {
+    return { title: "Produto não encontrado" };
+  }
+
+  return {
+    title: `${product.name} | Ground Culture`,
+    description: product.description,
+    alternates: {
+      canonical: `/produto/${product.id}`,
+    },
+    openGraph: {
+      title: `${product.name} | Ground Culture`,
+      description: product.description,
+      url: `/produto/${product.id}`,
+      images: [
+        {
+          url: product.images[0],
+          width: 640,
+          height: 800,
+          alt: product.name,
+        },
+      ],
+    },
+  };
+}
+
+export default async function ProdutoPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const product = storeData.products.find(p => p.id === params.slug);
-  const { addItem } = useCartStore();
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [error, setError] = useState(false);
   
   if (!product) return notFound();
 
-  const handleAddToCart = () => {
-    if (!selectedSize) {
-      setError(true);
-      return;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: product.images,
+    description: product.description,
+    offers: {
+      "@type": "Offer",
+      url: product.url,
+      priceCurrency: "BRL",
+      price: product.price,
+      availability: "https://schema.org/InStock"
     }
-    setError(false);
-    addItem(product, selectedSize);
   };
 
   return (
     <div className="bg-bgPrimary text-white min-h-screen pt-32 pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container mx-auto px-6 lg:px-12 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
@@ -63,41 +103,7 @@ export default function ProdutoPage(props: { params: Promise<{ slug: string }> }
                 </p>
               </div>
 
-              <div className="mb-10 border-t border-borderPrimary pt-8">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="font-bold uppercase tracking-widest text-xs text-white/50">Selecione o Tamanho</span>
-                </div>
-                <div className="grid grid-cols-5 gap-2">
-                  {product.variants.map((size) => (
-                    <button
-                      key={size}
-                      onClick={() => {
-                        setSelectedSize(size);
-                        setError(false);
-                      }}
-                      className={`py-4 text-sm font-medium rounded-lg border transition-all ${
-                        selectedSize === size
-                          ? "border-white bg-white text-black"
-                          : "border-borderLight text-white/60 hover:border-white hover:text-white"
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-                {error && (
-                  <p className="text-red-400 text-sm mt-3" aria-live="polite">Por favor, selecione um tamanho.</p>
-                )}
-              </div>
-
-              <Button 
-                size="lg" 
-                className="w-full mb-4"
-                onClick={handleAddToCart}
-                variant="accent"
-              >
-                Adicionar ao Carrinho
-              </Button>
+              <AddToCart product={product} />
 
               <div className="border-t border-borderPrimary mt-10 pt-8">
                 <h4 className="font-bold uppercase tracking-widest text-xs text-white/50 mb-4">Detalhes do Produto</h4>

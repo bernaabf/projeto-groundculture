@@ -4,7 +4,7 @@ import { LetteringText } from "@/components/ui/LetteringText";
 import ContactForm from "@/components/ui/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact | Ground Culture",
+  title: "Contato",
 };
 
 export default function ContatoPage() {

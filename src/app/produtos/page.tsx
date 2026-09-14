@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import { LetteringText } from "@/components/ui/LetteringText";
 
 export const metadata: Metadata = {
-  title: "Collection | Ground Culture",
+  title: "Coleção",
   description: "Full collection of Ground Culture rashguards and fightwear.",
 };
 

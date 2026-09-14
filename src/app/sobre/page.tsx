@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { LetteringText } from "@/components/ui/LetteringText";
 
 export const metadata: Metadata = {
-  title: "The Editorial | Ground Culture",
+  title: "O Editorial",
 };
 
 export default function SobrePage() {

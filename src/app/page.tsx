@@ -95,7 +95,7 @@ export default function Home() {
               <Link href="/produtos?categoria=Manga%20Curta" className="block relative aspect-square overflow-hidden rounded-md border border-borderLight">
                 <Image 
                   src={storeData.products[0].images[0]} 
-                  alt="Manga Curta" 
+                  alt="Coleção de Rashguards Manga Curta - Ground Culture" 
                   fill 
                   className="object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-out"
                 />
@@ -111,7 +111,7 @@ export default function Home() {
               <Link href="/produtos?categoria=Manga%20Longa" className="block relative aspect-square overflow-hidden rounded-md border border-borderLight">
                 <Image 
                   src={storeData.products.find(p => p.category === "Manga Longa")?.images[0] || ""} 
-                  alt="Manga Longa" 
+                  alt="Coleção de Rashguards Manga Longa - Ground Culture" 
                   fill 
                   className="object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-out"
                 />
