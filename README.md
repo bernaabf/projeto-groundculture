@@ -24,6 +24,15 @@ O projeto segue a estrutura baseada no `App Router` do Next.js:
 - `src/utils/`: Funções utilitárias gerais.
 - `public/`: Imagens estáticas e assets.
 
+## ✨ Melhorias Recentes
+
+Este projeto passou recentemente por uma auditoria completa, implementando as seguintes otimizações:
+
+- **SEO & Metadados**: Geração estática e dinâmica de Metadados (`generateMetadata`), adição de dados estruturados (JSON-LD para produtos e organização) e implementação de `sitemap.xml` e `robots.txt`.
+- **Acessibilidade (a11y)**: Melhoria de navegação via teclado, adição de `aria-labels` e `roles`, lock de scroll para o carrinho e rings visíveis de focus nos botões.
+- **Performance**: Uso otimizado de imagens no Next.js (formatos WebP/AVIF servidos localmente), refatoração de rotas dinâmicas para Server Components e uso de seletores otimizados do Zustand (`useCartStore`) para evitar re-renderizações desnecessárias.
+- **Bugs e UX**: Correção do fluxo de filtro nas páginas de produtos e ajustes de estado (Hydration Mismatches). O formulário de contato agora está totalmente integrado para iniciar conversas automaticamente via WhatsApp.
+
 ## 🛠️ Como Executar Localmente
 
 Siga os passos abaixo para rodar o projeto na sua máquina:
