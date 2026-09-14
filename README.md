@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ground Culture - Landing Page
 
-## Getting Started
+Bem-vindo ao repositório do **Ground Culture**, uma landing page moderna, rápida e responsiva construída com as tecnologias mais recentes do ecossistema web. 
 
-First, run the development server:
+Este projeto foi desenvolvido para oferecer uma experiência de usuário premium, com animações fluidas e uma interface limpa.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Tecnologias Utilizadas
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **[Next.js](https://nextjs.org/)** - Framework React para performance e SEO.
+- **[React](https://react.dev/)** - Biblioteca para criação de interfaces de usuário.
+- **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática para maior segurança e manutenção do código.
+- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utilitário para estilização rápida e responsiva.
+- **[Framer Motion](https://www.framer.com/motion/)** - Biblioteca de animações para React, responsável pelas transições suaves.
+- **[Zustand](https://zustand-demo.pmnd.rs/)** - Gerenciamento de estado global leve e rápido (utilizado para o carrinho de compras).
+- **[Lucide React](https://lucide.dev/)** - Conjunto de ícones modernos.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Estrutura do Projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O projeto segue a estrutura baseada no `App Router` do Next.js:
 
-## Learn More
+- `src/app/`: Rotas, páginas e layouts.
+- `src/components/`: Componentes reutilizáveis (UI, botões, cards, carrinho, layout etc.).
+- `src/lib/`: Dados do site (`data.ts`) e configurações de estado global (Zustand store).
+- `src/utils/`: Funções utilitárias gerais.
+- `public/`: Imagens estáticas e assets.
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠️ Como Executar Localmente
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Siga os passos abaixo para rodar o projeto na sua máquina:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/bernaabf/projeto-groundculture.git
+   ```
 
-## Deploy on Vercel
+2. **Entre na pasta e instale as dependências:**
+   ```bash
+   cd código-landingpage-groundculture
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Acesse no navegador:**
+   Abra [http://localhost:3000](http://localhost:3000) para ver o resultado.
+
+## 🚀 Como fazer o Deploy
+
+A maneira mais simples de fazer o deploy deste projeto é utilizando a plataforma [Vercel](https://vercel.com/):
+
+1. Faça login na Vercel com a sua conta do GitHub.
+2. Clique em **"Add New Project"** e selecione este repositório.
+3. Não é necessário alterar nenhuma configuração padrão. Apenas clique em **"Deploy"**.
+4. Seu projeto estará online em poucos minutos e receberá atualizações automáticas sempre que você fizer um `git push` para a branch `main`.
