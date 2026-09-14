@@ -92,7 +92,7 @@ export default function Home() {
                 <h3 className="font-display font-medium text-3xl">Manga Curta</h3>
                 <span className="text-xs uppercase tracking-widest text-white/40 font-bold">/ Coleção</span>
               </div>
-              <Link href="/produtos?categoria=Manga Curta" className="block relative aspect-square overflow-hidden rounded-md border border-borderLight">
+              <Link href="/produtos?categoria=Manga%20Curta" className="block relative aspect-square overflow-hidden rounded-md border border-borderLight">
                 <Image 
                   src={storeData.products[0].images[0]} 
                   alt="Manga Curta" 
@@ -108,7 +108,7 @@ export default function Home() {
                 <h3 className="font-display font-medium text-3xl">Manga Longa</h3>
                 <span className="text-xs uppercase tracking-widest text-white/40 font-bold">/ Coleção</span>
               </div>
-              <Link href="/produtos?categoria=Manga Longa" className="block relative aspect-square overflow-hidden rounded-md border border-borderLight">
+              <Link href="/produtos?categoria=Manga%20Longa" className="block relative aspect-square overflow-hidden rounded-md border border-borderLight">
                 <Image 
                   src={storeData.products.find(p => p.category === "Manga Longa")?.images[0] || ""} 
                   alt="Manga Longa" 

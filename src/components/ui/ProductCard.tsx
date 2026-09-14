@@ -11,7 +11,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const hoverImage = product.images.length > 1 ? product.images[1] : product.images[0];
+
   
   // 3D Parallax setup
   const x = useMotionValue(0);
@@ -61,17 +61,21 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.images[0]}
             alt={product.name}
             fill
-            className="object-cover transition-all duration-700 ease-in-out group-hover:opacity-0"
+            className={`object-cover transition-all duration-700 ease-in-out ${
+              product.images.length > 1 ? "group-hover:opacity-0" : "group-hover:scale-105"
+            }`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {/* Hover Image */}
-          <Image
-            src={hoverImage}
-            alt={`${product.name} Hover`}
-            fill
-            className="object-cover transition-all duration-700 ease-in-out opacity-0 group-hover:scale-105 group-hover:opacity-100 absolute inset-0"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          {product.images.length > 1 && (
+            <Image
+              src={product.images[1]}
+              alt={`${product.name} Hover`}
+              fill
+              className="object-cover transition-all duration-700 ease-in-out opacity-0 group-hover:scale-105 group-hover:opacity-100 absolute inset-0"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          )}
           <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-sm border border-white/10">
             Novo
           </div>

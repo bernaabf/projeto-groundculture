@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { storeData } from "@/lib/data";
-import { Button } from "@/components/ui/Button";
 import { LetteringText } from "@/components/ui/LetteringText";
+import ContactForm from "@/components/ui/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact | Ground Culture",
@@ -52,38 +52,7 @@ export default function ContatoPage() {
           {/* Minimalist Form */}
           <div className="bg-bgSecondary p-8 md:p-12 rounded-3xl shadow-sm border border-borderLight">
             <h3 className="text-2xl font-display font-medium mb-8">Envie uma mensagem</h3>
-            <form className="space-y-8">
-              <div>
-                <label htmlFor="name" className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Nome</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  className="w-full border-b border-borderLight py-3 bg-transparent font-light focus:outline-none focus:border-white transition-colors text-lg"
-                  placeholder="João Silva"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  className="w-full border-b border-borderLight py-3 bg-transparent font-light focus:outline-none focus:border-white transition-colors text-lg"
-                  placeholder="joao@exemplo.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Mensagem</label>
-                <textarea 
-                  id="message" 
-                  rows={4}
-                  className="w-full border-b border-borderLight py-3 bg-transparent font-light focus:outline-none focus:border-white transition-colors resize-none text-lg"
-                  placeholder="Como podemos ajudar?"
-                ></textarea>
-              </div>
-              <Button type="button" className="w-full bg-white text-bgPrimary hover:bg-white/90" size="lg" variant="primary">
-                Enviar Solicitação
-              </Button>
-            </form>
+            <ContactForm whatsappLink={storeData.contact.whatsapp} />
           </div>
         </div>
       </div>

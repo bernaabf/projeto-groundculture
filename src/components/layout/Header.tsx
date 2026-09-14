@@ -6,17 +6,21 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/utils/utils";
-import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 
 export default function Header() {
-  const { openCart, items } = useCartStore();
+  const openCart = useCartStore(state => state.openCart);
+  const items = useCartStore(state => state.items);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
 
-  const cartCount = items.reduce((acc, item) => acc + item.quantity, 0);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
+  const cartCount = mounted ? items.reduce((acc, item) => acc + item.quantity, 0) : 0;
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -24,10 +28,6 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
 
   const navLinks = [
     { name: "Produtos", href: "/produtos" },
@@ -129,6 +129,7 @@ export default function Header() {
                   <Link
                     href={link.href}
                     className="text-4xl font-display font-medium tracking-tight"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.name}
                   </Link>

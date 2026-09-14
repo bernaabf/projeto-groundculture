@@ -12,14 +12,16 @@ export default function ProdutoPage(props: { params: Promise<{ slug: string }> }
   const product = storeData.products.find(p => p.id === params.slug);
   const { addItem } = useCartStore();
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [error, setError] = useState(false);
   
   if (!product) return notFound();
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("Por favor, selecione um tamanho.");
+      setError(true);
       return;
     }
+    setError(false);
     addItem(product, selectedSize);
   };
 
@@ -64,13 +66,15 @@ export default function ProdutoPage(props: { params: Promise<{ slug: string }> }
               <div className="mb-10 border-t border-borderPrimary pt-8">
                 <div className="flex justify-between items-center mb-4">
                   <span className="font-bold uppercase tracking-widest text-xs text-white/50">Selecione o Tamanho</span>
-                  <button className="text-xs uppercase tracking-widest text-white underline underline-offset-4 opacity-60 hover:opacity-100">Guia de Medidas</button>
                 </div>
                 <div className="grid grid-cols-5 gap-2">
                   {product.variants.map((size) => (
                     <button
                       key={size}
-                      onClick={() => setSelectedSize(size)}
+                      onClick={() => {
+                        setSelectedSize(size);
+                        setError(false);
+                      }}
                       className={`py-4 text-sm font-medium rounded-lg border transition-all ${
                         selectedSize === size
                           ? "border-white bg-white text-black"
@@ -81,6 +85,9 @@ export default function ProdutoPage(props: { params: Promise<{ slug: string }> }
                     </button>
                   ))}
                 </div>
+                {error && (
+                  <p className="text-red-400 text-sm mt-3" aria-live="polite">Por favor, selecione um tamanho.</p>
+                )}
               </div>
 
               <Button 

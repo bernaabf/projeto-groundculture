@@ -1,4 +1,27 @@
-export const storeData = {
+export type Category = "Manga Curta" | "Manga Longa";
+
+export interface Product {
+  id: string;
+  url: string;
+  name: string;
+  price: number;
+  comparePrice: number | null;
+  description: string;
+  images: string[];
+  variants: string[];
+  category: Category;
+}
+
+export interface StoreData {
+  contact: {
+    whatsapp: string;
+    instagram: string;
+    email: string;
+  };
+  products: Product[];
+}
+
+export const storeData: StoreData = {
   contact: {
     whatsapp: "https://wa.me/5581991614811",
     instagram: "https://instagram.com/groundculture.store",
@@ -97,6 +120,5 @@ export const storeData = {
       category: "Manga Longa"
     }
   ]
-};
 
-export type Product = typeof storeData.products[0];
+};

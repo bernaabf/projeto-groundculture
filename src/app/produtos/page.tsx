@@ -9,12 +9,11 @@ export const metadata: Metadata = {
   description: "Full collection of Ground Culture rashguards and fightwear.",
 };
 
-export default function ProdutosPage({
-  searchParams,
-}: {
-  searchParams: { categoria?: string };
+export default async function ProdutosPage(props: {
+  searchParams: Promise<{ categoria?: string }>;
 }) {
-  const { categoria } = searchParams;
+  const searchParams = await props.searchParams;
+  const categoria = searchParams.categoria;
   
   let products = storeData.products;
   if (categoria) {
@@ -46,7 +45,7 @@ export default function ProdutosPage({
                 {categorias.map(cat => (
                   <li key={cat}>
                     <Link 
-                      href={`/produtos?categoria=${cat}`} 
+                      href={`/produtos?categoria=${encodeURIComponent(cat)}`} 
                       className={`text-lg transition-colors ${categoria === cat ? 'text-white font-medium' : 'text-white/50 hover:text-white'}`}
                     >
                       {cat}
@@ -67,11 +66,17 @@ export default function ProdutosPage({
               <p className="text-sm font-medium uppercase tracking-widest text-white/40">{products.length} Itens</p>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
-              {products.map(product => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            {products.length === 0 ? (
+              <div className="py-12 text-center text-white/60">
+                Nenhum produto nesta categoria.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
+                {products.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            )}
           </main>
         </div>
       </div>
