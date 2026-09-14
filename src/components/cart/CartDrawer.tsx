@@ -8,7 +8,12 @@ import Image from "next/image";
 import { useEffect } from "react";
 
 export default function CartDrawer() {
-  const { isOpen, closeCart, items, removeItem, updateQuantity, getTotal } = useCartStore();
+  const isOpen = useCartStore(state => state.isOpen);
+  const closeCart = useCartStore(state => state.closeCart);
+  const items = useCartStore(state => state.items);
+  const removeItem = useCartStore(state => state.removeItem);
+  const updateQuantity = useCartStore(state => state.updateQuantity);
+  const getTotal = useCartStore(state => state.getTotal);
 
   const total = getTotal();
 

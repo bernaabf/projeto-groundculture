@@ -36,7 +36,7 @@ export const storeData: StoreData = {
       comparePrice: null,
       description: "Rashguard Ground Culture Rasta Lion. Produzida em tecido de alta performance, perfeita para os seus treinos de Jiu-Jitsu e submission. Costura reforçada e design exclusivo.",
       images: [
-        "https://dcdn-us.mitiendanube.com/stores/007/401/115/products/chatgpt-image-31-de-ago-de-2026-00_17_18-53c7381e71e3fa364317881521636592-640-0.webp",
+        "/images/products/rasta-lion-mc.webp",
       ],
       variants: ["P", "M", "G", "GG", "XG"],
       category: "Manga Curta"
@@ -49,7 +49,7 @@ export const storeData: StoreData = {
       comparePrice: null,
       description: "Rashguard Ground Culture Black Lion. A clássica. Produzida em tecido de alta performance, perfeita para os seus treinos de Jiu-Jitsu e submission.",
       images: [
-        "https://dcdn-us.mitiendanube.com/stores/007/401/115/products/chatgpt-image-31-de-ago-de-2026-00_04_14-7309a1dfe262f1041917881831370867-640-0.webp",
+        "/images/products/black-lion-mc.webp",
       ],
       variants: ["P", "M", "G", "GG", "XG"],
       category: "Manga Curta"
@@ -62,7 +62,7 @@ export const storeData: StoreData = {
       comparePrice: null,
       description: "Rashguard Ground Culture Olive Lion. Tom verde militar e tecido de alta performance.",
       images: [
-        "https://dcdn-us.mitiendanube.com/stores/007/401/115/products/chatgpt-image-31-de-ago-de-2026-00_24_29-8b23f2c5cc4f8567ae17882274321379-640-0.webp",
+        "/images/products/olive-lion-mc.webp",
       ],
       variants: ["P", "M", "G", "GG", "XG"],
       category: "Manga Curta"
@@ -75,7 +75,7 @@ export const storeData: StoreData = {
       comparePrice: null,
       description: "Rashguard Ground Culture CORE Blue. Design limpo e essencial. Tecido com tecnologia de compressão ideal.",
       images: [
-        "https://dcdn-us.mitiendanube.com/stores/007/401/115/products/1000299130-0c7459472291f2eba817883205123117-640-0.webp",
+        "/images/products/core-blue-mc.webp",
       ],
       variants: ["P", "M", "G", "GG", "XG"],
       category: "Manga Curta"
@@ -88,7 +88,7 @@ export const storeData: StoreData = {
       comparePrice: null,
       description: "A evolução do modelo BlackOut. Tecido preto fosco de alta resistência.",
       images: [
-        "https://dcdn-us.mitiendanube.com/stores/007/401/115/products/bbccdb0f-2257-45fb-a650-3134fb586cc8-73320fb8bad425fb5317886265446655-640-0.webp",
+        "/images/products/blackout-mc.webp",
       ],
       variants: ["P", "M", "G", "GG", "XG"],
       category: "Manga Curta"
@@ -101,7 +101,7 @@ export const storeData: StoreData = {
       comparePrice: null,
       description: "Tonalidade areia. Estilo e proteção, projetado para o jiu-jitsu.",
       images: [
-        "https://dcdn-us.mitiendanube.com/stores/007/401/115/products/chatgpt-image-1-de-set-de-2026-18_51_38-df84d71ff51f74e3d717886271084093-640-0.webp",
+        "/images/products/sandstorm-mc.webp",
       ],
       variants: ["P", "M", "G", "GG", "XG"],
       category: "Manga Curta"
@@ -114,7 +114,7 @@ export const storeData: StoreData = {
       comparePrice: null,
       description: "Versão manga longa da nossa clássica Black Lion. Proteção extra para seus braços no tatame.",
       images: [
-        "https://dcdn-us.mitiendanube.com/stores/007/401/115/products/file_000000009ed4820e914d484f22a83597-3bc6f1625fd1aca54e17882261782914-640-0.webp",
+        "/images/products/black-lion-ml.webp",
       ],
       variants: ["P", "M", "G", "GG", "XG"],
       category: "Manga Longa"

@@ -34,6 +34,8 @@ export default function Home() {
               src="/images/hero-bg.jpg"
               alt="Ground Culture Rashguard"
               fill
+              sizes="100vw"
+              quality={90}
               className="object-cover object-center opacity-70"
               priority
             />
