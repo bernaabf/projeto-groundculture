@@ -5,11 +5,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function CartDrawer() {
   const { isOpen, closeCart, items, removeItem, updateQuantity, getTotal } = useCartStore();
 
   const total = getTotal();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
@@ -39,6 +51,7 @@ export default function CartDrawer() {
               <button
                 onClick={closeCart}
                 className="p-2 hover:bg-neutral-100 rounded-full transition-colors"
+                aria-label="Fechar carrinho"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -76,6 +89,7 @@ export default function CartDrawer() {
                           <button
                             onClick={() => updateQuantity(item.product.id, item.variant, item.quantity - 1)}
                             className="p-1 hover:bg-neutral-100 transition-colors"
+                            aria-label="Diminuir quantidade"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
@@ -83,6 +97,7 @@ export default function CartDrawer() {
                           <button
                             onClick={() => updateQuantity(item.product.id, item.variant, item.quantity + 1)}
                             className="p-1 hover:bg-neutral-100 transition-colors"
+                            aria-label="Aumentar quantidade"
                           >
                             <Plus className="w-4 h-4" />
                           </button>

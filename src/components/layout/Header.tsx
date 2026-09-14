@@ -29,6 +29,17 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: "Produtos", href: "/produtos" },
     { name: "Editorial", href: "/sobre" },
@@ -90,6 +101,8 @@ export default function Header() {
             <button
               className="lg:hidden p-2 rounded-full hover:bg-white/10"
               onClick={() => setMobileMenuOpen(true)}
+              aria-label="Abrir menu"
+              aria-expanded={mobileMenuOpen}
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -113,6 +126,7 @@ export default function Header() {
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-3 bg-white/10 rounded-full"
+                aria-label="Fechar menu"
               >
                 <X className="w-5 h-5" />
               </button>

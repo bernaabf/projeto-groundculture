@@ -25,10 +25,10 @@ export default function AddToCart({ product }: AddToCartProps) {
 
   return (
     <div className="mb-10 border-t border-borderPrimary pt-8">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4" id="size-label">
         <span className="font-bold uppercase tracking-widest text-xs text-white/50">Selecione o Tamanho</span>
       </div>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-2" role="radiogroup" aria-labelledby="size-label">
         {product.variants.map((size) => (
           <button
             key={size}
@@ -41,6 +41,8 @@ export default function AddToCart({ product }: AddToCartProps) {
                 ? "border-white bg-white text-black"
                 : "border-borderLight text-white/60 hover:border-white hover:text-white"
             }`}
+            role="radio"
+            aria-checked={selectedSize === size}
           >
             {size}
           </button>
