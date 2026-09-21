@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function CartDrawer() {
   const isOpen = useCartStore(state => state.isOpen);
@@ -14,8 +15,59 @@ export default function CartDrawer() {
   const removeItem = useCartStore(state => state.removeItem);
   const updateQuantity = useCartStore(state => state.updateQuantity);
   const getTotal = useCartStore(state => state.getTotal);
+  const router = useRouter();
 
-  const total = getTotal();
+  const [cep, setCep] = useState("");
+  const [shippingOptions, setShippingOptions] = useState<any[]>([]);
+  const [selectedShipping, setSelectedShipping] = useState<any>(null);
+  const [isLoadingShipping, setIsLoadingShipping] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+  const subtotal = getTotal();
+  const total = subtotal + (selectedShipping?.price || 0);
+
+  const handleCalculateShipping = async () => {
+    if (cep.length !== 8 && cep.length !== 9) return;
+    setIsLoadingShipping(true);
+    try {
+      const res = await fetch("/api/shipping", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cep, items }),
+      });
+      const data = await res.json();
+      if (data.options) {
+        setShippingOptions(data.options);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoadingShipping(false);
+    }
+  };
+
+  const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          items,
+          shippingPrice: selectedShipping?.price,
+          shippingMethod: selectedShipping?.name
+        }),
+      });
+      const data = await res.json();
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -126,16 +178,75 @@ export default function CartDrawer() {
             </div>
 
             {items.length > 0 && (
-              <div className="p-6 border-t border-neutral-100 bg-neutral-50/50">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="uppercase tracking-widest text-sm text-neutral-500">Subtotal</span>
-                  <span className="text-xl font-bold">R$ {total.toFixed(2).replace('.', ',')}</span>
+              <div className="p-6 border-t border-neutral-100 bg-neutral-50/50 space-y-4">
+                
+                {/* Shipping Calculator */}
+                <div className="space-y-2">
+                  <span className="text-sm font-medium">Calcular Frete</span>
+                  <div className="flex gap-2">
+                    <input 
+                      type="text" 
+                      placeholder="CEP" 
+                      value={cep}
+                      onChange={(e) => setCep(e.target.value)}
+                      className="flex-1 px-3 py-2 border border-neutral-200 rounded-md text-sm"
+                      maxLength={9}
+                    />
+                    <Button variant="outline" onClick={handleCalculateShipping} disabled={isLoadingShipping}>
+                      {isLoadingShipping ? "..." : "Calcular"}
+                    </Button>
+                  </div>
+                  
+                  {shippingOptions.length > 0 && (
+                    <div className="mt-3 space-y-2">
+                      {shippingOptions.map((opt) => (
+                        <label key={opt.id} className="flex items-center justify-between p-2 border border-neutral-200 rounded-md cursor-pointer hover:bg-neutral-50">
+                          <div className="flex items-center gap-2">
+                            <input 
+                              type="radio" 
+                              name="shipping" 
+                              value={opt.id} 
+                              onChange={() => setSelectedShipping(opt)}
+                              className="accent-black"
+                            />
+                            <div>
+                              <p className="text-sm font-medium">{opt.name}</p>
+                              <p className="text-xs text-neutral-500">Até {opt.days} dias úteis</p>
+                            </div>
+                          </div>
+                          <span className="text-sm font-semibold">
+                            R$ {opt.price.toFixed(2).replace('.', ',')}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <p className="text-xs text-neutral-500 mb-6 text-center">
-                  O pagamento e o frete não estão disponíveis nesta versão de demonstração.
-                </p>
-                <Button className="w-full h-12" size="lg" disabled>
-                  Finalizar Compra
+
+                <div className="space-y-2 pt-4 border-t border-neutral-200">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-neutral-500">Subtotal</span>
+                    <span className="text-sm font-medium">R$ {subtotal.toFixed(2).replace('.', ',')}</span>
+                  </div>
+                  {selectedShipping && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-neutral-500">Frete</span>
+                      <span className="text-sm font-medium">R$ {selectedShipping.price.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between pt-2">
+                    <span className="uppercase tracking-widest text-sm text-neutral-800 font-bold">Total</span>
+                    <span className="text-xl font-bold">R$ {total.toFixed(2).replace('.', ',')}</span>
+                  </div>
+                </div>
+                
+                <Button 
+                  className="w-full h-12 mt-4" 
+                  size="lg" 
+                  onClick={handleCheckout}
+                  disabled={isCheckingOut}
+                >
+                  {isCheckingOut ? "Redirecionando..." : "Finalizar Compra"}
                 </Button>
               </div>
             )}

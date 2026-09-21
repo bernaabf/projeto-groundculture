@@ -51,6 +51,7 @@ export default function Header() {
     { name: "Produtos", href: "/produtos" },
     { name: "Editorial", href: "/sobre" },
     { name: "Contato", href: "/contato" },
+    { name: "Login", href: "/login" },
   ];
 
   return (
