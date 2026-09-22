@@ -57,19 +57,19 @@ export default function Header() {
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className={cn(
-          "fixed top-4 inset-x-4 z-50 flex justify-center pointer-events-none"
+          "fixed top-6 inset-x-4 z-50 flex justify-center pointer-events-none"
         )}
       >
         <motion.div 
           layout
           className={cn(
-            "px-6 py-3 flex items-center justify-between rounded-full transition-colors duration-500 pointer-events-auto",
-            isScrolled ? "bg-bgSecondary/80 backdrop-blur-xl border border-white/10 shadow-2xl w-full max-w-4xl" : "bg-transparent w-full",
-            "text-white"
+            "px-6 py-3 flex items-center justify-between rounded-full transition-all duration-300 pointer-events-auto",
+            "bg-bgSecondary/60 backdrop-blur-xl border border-white/10 shadow-xl w-full max-w-4xl text-white",
+            isScrolled ? "py-2 px-5" : "py-3 px-6"
           )}
         >
           {/* Logo */}
@@ -78,18 +78,18 @@ export default function Header() {
             className="text-xl font-display font-medium tracking-tight shrink-0 flex items-center gap-2"
           >
             <div className="w-6 h-6 rounded-full transition-colors bg-white" />
-            <span className={cn("transition-all duration-300 origin-left hidden sm:block", isScrolled && "scale-90")}>
+            <span className={cn("transition-all duration-300 origin-left hidden sm:block", isScrolled && "scale-95 opacity-80")}>
               Ground Culture
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1 bg-white/5 px-2 py-1 rounded-full">
+          <nav className="hidden lg:flex items-center gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium px-4 py-2 rounded-full transition-colors hover:bg-white/10 hover:text-white text-white/70"
+                className="text-sm font-medium px-4 py-2 rounded-full transition-colors hover:text-white text-white/60 hover:bg-white/5"
               >
                 {link.name}
               </Link>
@@ -97,10 +97,10 @@ export default function Header() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <button
               onClick={openCart}
-              className="relative text-sm font-medium px-4 py-2 rounded-full transition-colors flex items-center gap-2 hover:bg-white/10 text-white/70 hover:text-white"
+              className="relative text-sm font-medium px-4 py-2 rounded-full transition-colors flex items-center gap-2 text-white/60 hover:text-white hover:bg-white/5"
             >
               Carrinho
               {cartCount > 0 && (
@@ -114,12 +114,12 @@ export default function Header() {
               )}
             </button>
             <Link href="/produtos" className="hidden lg:block">
-              <Button size="sm" variant="outline" className="border-white/20 hover:bg-white hover:text-black">Explorar</Button>
+              <Button size="sm" variant="primary" className="h-9 px-5">Explorar</Button>
             </Link>
             
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-full hover:bg-white/10"
+              className="lg:hidden p-2 rounded-full text-white/60 hover:text-white hover:bg-white/5"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Abrir menu"
               aria-expanded={mobileMenuOpen}

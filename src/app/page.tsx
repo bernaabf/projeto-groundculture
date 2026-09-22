@@ -27,7 +27,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex flex-col items-center justify-end pb-32 overflow-hidden bg-bgPrimary"
+        className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-bgPrimary"
       >
         <div className="absolute inset-0 z-0">
           <motion.div style={{ y: y1, opacity }} className="absolute inset-0 w-full h-full">
