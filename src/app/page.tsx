@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import ProductCard from "@/components/ui/ProductCard";
 import { storeData } from "@/lib/data";
 import { LetteringText } from "@/components/ui/LetteringText";
+import AnimatedSection from "@/components/ui/AnimatedSection";
 
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -79,8 +80,8 @@ export default function Home() {
       </section>
 
       {/* Grid Features Layout (Inspired by Vita Travels) */}
-      <section className="py-24 border-t border-borderPrimary bg-bgPrimary">
-        <div className="container mx-auto px-6 lg:px-12">
+      <section className="py-24 border-t border-borderPrimary bg-bgPrimary overflow-hidden">
+        <AnimatedSection className="container mx-auto px-6 lg:px-12">
           
           <div className="flex justify-between items-end mb-16">
             <h2 className="text-4xl md:text-5xl font-display font-medium tracking-tight">Categorias</h2>
@@ -120,12 +121,12 @@ export default function Home() {
               </Link>
             </div>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
 
       {/* Featured Products */}
-      <section className="py-24 border-t border-borderPrimary">
-        <div className="container mx-auto px-6 lg:px-12">
+      <section className="py-24 border-t border-borderPrimary overflow-hidden">
+        <AnimatedSection className="container mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row justify-between md:items-end mb-16 gap-6">
             <div className="max-w-xl">
               <h2 className="text-4xl md:text-5xl font-display font-medium tracking-tight mb-6">Destaques</h2>
@@ -152,7 +153,7 @@ export default function Home() {
                 <Button variant="outline" className="w-full border-white/20">Ver Todos</Button>
              </Link>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
 
       {/* Editorial Manifesto */}

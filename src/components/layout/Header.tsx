@@ -56,32 +56,40 @@ export default function Header() {
 
   return (
     <>
-      <header
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className={cn(
-          "fixed top-4 inset-x-4 z-50 transition-all duration-500",
+          "fixed top-4 inset-x-4 z-50 flex justify-center pointer-events-none"
         )}
       >
-        <div className={cn(
-          "container mx-auto px-4 py-3 flex items-center justify-between rounded-2xl transition-all duration-300",
-          isScrolled ? "bg-bgSecondary/90 backdrop-blur-md shadow-lg border border-borderPrimary" : "bg-transparent",
-          "text-white"
-        )}>
+        <motion.div 
+          layout
+          className={cn(
+            "px-6 py-3 flex items-center justify-between rounded-full transition-colors duration-500 pointer-events-auto",
+            isScrolled ? "bg-bgSecondary/80 backdrop-blur-xl border border-white/10 shadow-2xl w-full max-w-4xl" : "bg-transparent w-full",
+            "text-white"
+          )}
+        >
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-display font-medium tracking-tight shrink-0 flex items-center gap-2"
+            className="text-xl font-display font-medium tracking-tight shrink-0 flex items-center gap-2"
           >
             <div className="w-6 h-6 rounded-full transition-colors bg-white" />
-            Ground Culture
+            <span className={cn("transition-all duration-300 origin-left hidden sm:block", isScrolled && "scale-90")}>
+              Ground Culture
+            </span>
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-2">
+          <nav className="hidden lg:flex items-center gap-1 bg-white/5 px-2 py-1 rounded-full">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium px-4 py-2 rounded-full transition-colors hover:bg-white/10"
+                className="text-sm font-medium px-4 py-2 rounded-full transition-colors hover:bg-white/10 hover:text-white text-white/70"
               >
                 {link.name}
               </Link>
@@ -92,13 +100,17 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <button
               onClick={openCart}
-              className="relative text-sm font-medium px-4 py-2 rounded-full transition-colors flex items-center gap-2 hover:bg-white/10"
+              className="relative text-sm font-medium px-4 py-2 rounded-full transition-colors flex items-center gap-2 hover:bg-white/10 text-white/70 hover:text-white"
             >
               Carrinho
               {cartCount > 0 && (
-                <span className="bg-accent text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+                <motion.span 
+                  initial={{ scale: 0 }} 
+                  animate={{ scale: 1 }} 
+                  className="bg-accent text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full"
+                >
                   {cartCount}
-                </span>
+                </motion.span>
               )}
             </button>
             <Link href="/produtos" className="hidden lg:block">
@@ -115,8 +127,8 @@ export default function Header() {
               <Menu className="w-5 h-5" />
             </button>
           </div>
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
 
       {/* Mobile Menu */}
       <AnimatePresence>

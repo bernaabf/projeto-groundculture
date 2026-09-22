@@ -34,38 +34,47 @@ export default function ContactForm({ whatsappLink }: { whatsappLink: string }) 
         {success ? "Sua mensagem foi redirecionada para o WhatsApp com sucesso." : ""}
       </div>
       
-      <div>
-        <label htmlFor="name" className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Nome</label>
-        <input 
-          type="text" 
-          id="name"
-          name="name"
-          required
-          className="w-full border-b border-borderLight py-3 bg-transparent font-light focus:outline-none focus:border-white transition-colors text-lg"
-          placeholder="João Silva"
-        />
+      <div className="group relative">
+        <label htmlFor="name" className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1 transition-colors group-focus-within:text-white/80">Nome</label>
+        <div className="relative">
+          <input 
+            type="text" 
+            id="name"
+            name="name"
+            required
+            className="w-full border-b border-white/20 py-3 bg-transparent font-light focus:outline-none focus:border-white transition-all duration-300 text-lg placeholder-white/20"
+            placeholder="João Silva"
+          />
+          <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-focus-within:w-full"></span>
+        </div>
       </div>
-      <div>
-        <label htmlFor="email" className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Email</label>
-        <input 
-          type="email" 
-          id="email" 
-          name="email"
-          required
-          className="w-full border-b border-borderLight py-3 bg-transparent font-light focus:outline-none focus:border-white transition-colors text-lg"
-          placeholder="joao@exemplo.com"
-        />
+      <div className="group relative">
+        <label htmlFor="email" className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1 transition-colors group-focus-within:text-white/80">Email</label>
+        <div className="relative">
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            required
+            className="w-full border-b border-white/20 py-3 bg-transparent font-light focus:outline-none focus:border-white transition-all duration-300 text-lg placeholder-white/20"
+            placeholder="joao@exemplo.com"
+          />
+          <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-focus-within:w-full"></span>
+        </div>
       </div>
-      <div>
-        <label htmlFor="message" className="block text-xs font-bold uppercase tracking-widest text-white/40 mb-2">Mensagem</label>
-        <textarea 
-          id="message" 
-          name="message"
-          rows={4}
-          required
-          className="w-full border-b border-borderLight py-3 bg-transparent font-light focus:outline-none focus:border-white transition-colors resize-none text-lg"
-          placeholder="Como podemos ajudar?"
-        ></textarea>
+      <div className="group relative">
+        <label htmlFor="message" className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1 transition-colors group-focus-within:text-white/80">Mensagem</label>
+        <div className="relative">
+          <textarea 
+            id="message" 
+            name="message"
+            rows={4}
+            required
+            className="w-full border-b border-white/20 py-3 bg-transparent font-light focus:outline-none focus:border-white transition-all duration-300 resize-none text-lg placeholder-white/20"
+            placeholder="Como podemos ajudar?"
+          ></textarea>
+          <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-focus-within:w-full"></span>
+        </div>
       </div>
       <Button 
         type="submit" 

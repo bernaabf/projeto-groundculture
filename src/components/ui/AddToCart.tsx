@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { useCartStore } from "@/lib/store/useCartStore";
 import { Product } from "@/lib/data";
+import { motion } from "framer-motion";
 
 interface AddToCartProps {
   product: Product;
@@ -30,30 +31,31 @@ export default function AddToCart({ product }: AddToCartProps) {
       </div>
       <div className="grid grid-cols-5 gap-2" role="radiogroup" aria-labelledby="size-label">
         {product.variants.map((size) => (
-          <button
+          <motion.button
             key={size}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => {
               setSelectedSize(size);
               setError(false);
             }}
-            className={`py-4 text-sm font-medium rounded-lg border transition-all ${
-              selectedSize === size
+            className={`py-4 text-sm font-medium rounded-lg border transition-colors ${selectedSize === size
                 ? "border-white bg-white text-black"
                 : "border-borderLight text-white/60 hover:border-white hover:text-white"
-            }`}
+              }`}
             role="radio"
             aria-checked={selectedSize === size}
           >
             {size}
-          </button>
+          </motion.button>
         ))}
       </div>
       {error && (
         <p className="text-red-400 text-sm mt-3" aria-live="polite">Por favor, selecione um tamanho.</p>
       )}
 
-      <Button 
-        size="lg" 
+      <Button
+        size="lg"
         className="w-full mt-8"
         onClick={handleAddToCart}
         variant="accent"

@@ -22,13 +22,22 @@
     --foreground: #ffffff;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    cursor: auto;
+  }
+
+  @media (pointer: fine) {
+    body, a, button, input, textarea, select, label {
+      cursor: none !important;
+    }
   }
 
   h1, h2, h3, h4, h5, h6, .font-display {
