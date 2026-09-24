@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function CartDrawer() {
   const isOpen = useCartStore(state => state.isOpen);
@@ -16,6 +17,7 @@ export default function CartDrawer() {
   const updateQuantity = useCartStore(state => state.updateQuantity);
   const getTotal = useCartStore(state => state.getTotal);
   const router = useRouter();
+  const supabase = createClient();
 
   const [cep, setCep] = useState("");
   const [shippingOptions, setShippingOptions] = useState<any[]>([]);
@@ -26,8 +28,20 @@ export default function CartDrawer() {
   const subtotal = getTotal();
   const total = subtotal + (selectedShipping?.price || 0);
 
+  const handleCepChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é número
+    if (value.length > 8) value = value.slice(0, 8); // Limita a 8 dígitos
+    
+    // Aplica a máscara 00000-000
+    if (value.length > 5) {
+      value = value.slice(0, 5) + "-" + value.slice(5);
+    }
+    setCep(value);
+  };
+
   const handleCalculateShipping = async () => {
-    if (cep.length !== 8 && cep.length !== 9) return;
+    const rawCep = cep.replace(/\D/g, "");
+    if (rawCep.length !== 8) return;
     setIsLoadingShipping(true);
     try {
       const res = await fetch("/api/shipping", {
@@ -46,27 +60,18 @@ export default function CartDrawer() {
     }
   };
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     setIsCheckingOut(true);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          items,
-          shippingPrice: selectedShipping?.price,
-          shippingMethod: selectedShipping?.name
-        }),
-      });
-      const data = await res.json();
-      if (data.init_point) {
-        window.location.href = data.init_point;
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsCheckingOut(false);
+    closeCart();
+    
+    // Podemos passar os dados de frete via query params ou sessionStorage
+    // Para simplificar, vamos salvar no sessionStorage para a página de checkout recuperar
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('gc_checkout_shipping', JSON.stringify(selectedShipping));
+      sessionStorage.setItem('gc_checkout_cep', cep);
     }
+    
+    router.push("/checkout");
   };
 
   useEffect(() => {
@@ -79,6 +84,17 @@ export default function CartDrawer() {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("cart") === "true") {
+        useCartStore.getState().openCart();
+        // Remove param from URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+  }, []);
 
   return (
     <AnimatePresence>
@@ -99,7 +115,7 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-[101] flex flex-col"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-[101] flex flex-col text-neutral-900"
           >
             <div className="flex items-center justify-between p-6 border-b border-neutral-100">
               <h2 className="text-xl font-bold uppercase tracking-wider flex items-center gap-2">
@@ -119,7 +135,7 @@ export default function CartDrawer() {
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-neutral-400">
                   <ShoppingBag className="w-12 h-12 mb-2 opacity-50" />
                   <p className="uppercase tracking-widest text-sm">Seu carrinho está vazio</p>
-                  <Button variant="outline" onClick={closeCart} className="mt-4">
+                  <Button variant="outline" onClick={closeCart} className="mt-4 border-neutral-200 text-neutral-900 hover:bg-neutral-100">
                     Continuar comprando
                   </Button>
                 </div>
@@ -186,13 +202,13 @@ export default function CartDrawer() {
                   <div className="flex gap-2">
                     <input 
                       type="text" 
-                      placeholder="CEP" 
+                      placeholder="00000-000" 
                       value={cep}
-                      onChange={(e) => setCep(e.target.value)}
+                      onChange={handleCepChange}
                       className="flex-1 px-3 py-2 border border-neutral-200 rounded-md text-sm"
                       maxLength={9}
                     />
-                    <Button variant="outline" onClick={handleCalculateShipping} disabled={isLoadingShipping}>
+                    <Button variant="outline" onClick={handleCalculateShipping} disabled={isLoadingShipping} className="border-neutral-200 text-neutral-900 hover:bg-neutral-100">
                       {isLoadingShipping ? "..." : "Calcular"}
                     </Button>
                   </div>
@@ -241,7 +257,7 @@ export default function CartDrawer() {
                 </div>
                 
                 <Button 
-                  className="w-full h-12 mt-4" 
+                  className="w-full h-12 mt-4 bg-black text-white hover:bg-neutral-800" 
                   size="lg" 
                   onClick={handleCheckout}
                   disabled={isCheckingOut}

@@ -21,10 +21,18 @@ export default function LoginPage() {
 
     setIsLoading(true);
     try {
+      const params = new URLSearchParams(window.location.search);
+      const redirectTo = params.get('redirectTo');
+      let callbackUrl = `${window.location.origin}/auth/callback`;
+      
+      if (redirectTo === 'checkout') {
+        callbackUrl = `${window.location.origin}/auth/callback?next=/?cart=true`;
+      }
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: callbackUrl,
         },
       });
 
@@ -37,13 +45,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center pt-24 px-4 bg-neutral-50">
+    <div className="min-h-screen flex items-center justify-center pt-24 px-4 bg-bgPrimary">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-neutral-100"
+        className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-neutral-100 text-neutral-900"
       >
-        <h1 className="text-3xl font-display font-medium mb-2 text-center">Bem-vindo</h1>
+        <h1 className="text-3xl font-display font-medium mb-2 text-center text-black">Bem-vindo</h1>
         <p className="text-neutral-500 text-center mb-8 text-sm">
           Faça login para acompanhar seus pedidos e finalizar compras mais rápido.
         </p>
