@@ -40,8 +40,8 @@ export default function AddToCart({ product }: AddToCartProps) {
               setError(false);
             }}
             className={`py-4 text-sm font-medium rounded-lg border transition-colors ${selectedSize === size
-                ? "border-white bg-white text-black"
-                : "border-borderLight text-white/60 hover:border-white hover:text-white"
+              ? "border-white bg-white text-black"
+              : "border-borderLight text-white/60 hover:border-white hover:text-white"
               }`}
             role="radio"
             aria-checked={selectedSize === size}
