@@ -115,15 +115,15 @@ export default function CartDrawer() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl z-[101] flex flex-col text-neutral-900"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-black/40 backdrop-blur-2xl border-l border-white/10 shadow-2xl z-[101] flex flex-col text-white"
           >
-            <div className="flex items-center justify-between p-6 border-b border-neutral-100">
+            <div className="flex items-center justify-between p-6 border-b border-white/10">
               <h2 className="text-xl font-bold uppercase tracking-wider flex items-center gap-2">
                 <ShoppingBag className="w-5 h-5" /> Carrinho
               </h2>
               <button
                 onClick={closeCart}
-                className="p-2 hover:bg-neutral-100 rounded-full transition-colors"
+                className="p-2 hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Fechar carrinho"
               >
                 <X className="w-5 h-5" />
@@ -132,17 +132,17 @@ export default function CartDrawer() {
 
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {items.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-neutral-400">
+                <div className="h-full flex flex-col items-center justify-center text-center space-y-4 text-white/60">
                   <ShoppingBag className="w-12 h-12 mb-2 opacity-50" />
                   <p className="uppercase tracking-widest text-sm">Seu carrinho está vazio</p>
-                  <Button variant="outline" onClick={closeCart} className="mt-4 border-neutral-200 text-neutral-900 hover:bg-neutral-100">
+                  <Button variant="outline" onClick={closeCart} className="mt-4 border-white/20 bg-transparent text-white hover:bg-white/10">
                     Continuar comprando
                   </Button>
                 </div>
               ) : (
                 items.map((item) => (
                   <div key={`${item.product.id}-${item.variant}`} className="flex gap-4">
-                    <div className="w-24 h-24 bg-neutral-100 relative overflow-hidden">
+                    <div className="w-24 h-24 bg-white/5 relative overflow-hidden rounded-md border border-white/10">
                       <Image
                         src={item.product.images[0]}
                         alt={item.product.name}
@@ -155,13 +155,13 @@ export default function CartDrawer() {
                         <h3 className="font-semibold text-sm line-clamp-2 leading-snug">
                           {item.product.name}
                         </h3>
-                        <p className="text-sm text-neutral-500 mt-1">Tamanho: {item.variant}</p>
+                        <p className="text-sm text-white/60 mt-1">Tamanho: {item.variant}</p>
                       </div>
                       <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center border border-neutral-200">
+                        <div className="flex items-center border border-white/20 rounded-md overflow-hidden">
                           <button
                             onClick={() => updateQuantity(item.product.id, item.variant, item.quantity - 1)}
-                            className="p-1 hover:bg-neutral-100 transition-colors"
+                            className="p-1 hover:bg-white/10 transition-colors"
                             aria-label="Diminuir quantidade"
                           >
                             <Minus className="w-4 h-4" />
@@ -169,7 +169,7 @@ export default function CartDrawer() {
                           <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.product.id, item.variant, item.quantity + 1)}
-                            className="p-1 hover:bg-neutral-100 transition-colors"
+                            className="p-1 hover:bg-white/10 transition-colors"
                             aria-label="Aumentar quantidade"
                           >
                             <Plus className="w-4 h-4" />
@@ -177,7 +177,7 @@ export default function CartDrawer() {
                         </div>
                         <button
                           onClick={() => removeItem(item.product.id, item.variant)}
-                          className="text-xs text-neutral-400 hover:text-black uppercase tracking-wider underline underline-offset-2"
+                          className="text-xs text-white/50 hover:text-white uppercase tracking-wider underline underline-offset-2"
                         >
                           Remover
                         </button>
@@ -194,21 +194,21 @@ export default function CartDrawer() {
             </div>
 
             {items.length > 0 && (
-              <div className="p-6 border-t border-neutral-100 bg-neutral-50/50 space-y-4">
+              <div className="p-6 border-t border-white/10 bg-black/20 space-y-4">
                 
                 {/* Shipping Calculator */}
                 <div className="space-y-2">
-                  <span className="text-sm font-medium">Calcular Frete</span>
+                  <span className="text-sm font-medium text-white/90">Calcular Frete</span>
                   <div className="flex gap-2">
                     <input 
                       type="text" 
                       placeholder="00000-000" 
                       value={cep}
                       onChange={handleCepChange}
-                      className="flex-1 px-3 py-2 border border-neutral-200 rounded-md text-sm"
+                      className="flex-1 px-3 py-2 border border-white/20 bg-white/5 rounded-md text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-white/40 transition-colors"
                       maxLength={9}
                     />
-                    <Button variant="outline" onClick={handleCalculateShipping} disabled={isLoadingShipping} className="border-neutral-200 text-neutral-900 hover:bg-neutral-100">
+                    <Button variant="outline" onClick={handleCalculateShipping} disabled={isLoadingShipping} className="border-white/20 bg-transparent text-white hover:bg-white/10">
                       {isLoadingShipping ? "..." : "Calcular"}
                     </Button>
                   </div>
@@ -216,18 +216,18 @@ export default function CartDrawer() {
                   {shippingOptions.length > 0 && (
                     <div className="mt-3 space-y-2">
                       {shippingOptions.map((opt) => (
-                        <label key={opt.id} className="flex items-center justify-between p-2 border border-neutral-200 rounded-md cursor-pointer hover:bg-neutral-50">
+                        <label key={opt.id} className="flex items-center justify-between p-2 border border-white/20 rounded-md cursor-pointer hover:bg-white/10 transition-colors">
                           <div className="flex items-center gap-2">
                             <input 
                               type="radio" 
                               name="shipping" 
                               value={opt.id} 
                               onChange={() => setSelectedShipping(opt)}
-                              className="accent-black"
+                              className="accent-white"
                             />
                             <div>
                               <p className="text-sm font-medium">{opt.name}</p>
-                              <p className="text-xs text-neutral-500">Até {opt.days} dias úteis</p>
+                              <p className="text-xs text-white/60">Até {opt.days} dias úteis</p>
                             </div>
                           </div>
                           <span className="text-sm font-semibold">
@@ -239,25 +239,25 @@ export default function CartDrawer() {
                   )}
                 </div>
 
-                <div className="space-y-2 pt-4 border-t border-neutral-200">
+                <div className="space-y-2 pt-4 border-t border-white/20">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-neutral-500">Subtotal</span>
+                    <span className="text-sm text-white/60">Subtotal</span>
                     <span className="text-sm font-medium">R$ {subtotal.toFixed(2).replace('.', ',')}</span>
                   </div>
                   {selectedShipping && (
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-neutral-500">Frete</span>
+                      <span className="text-sm text-white/60">Frete</span>
                       <span className="text-sm font-medium">R$ {selectedShipping.price.toFixed(2).replace('.', ',')}</span>
                     </div>
                   )}
                   <div className="flex items-center justify-between pt-2">
-                    <span className="uppercase tracking-widest text-sm text-neutral-800 font-bold">Total</span>
+                    <span className="uppercase tracking-widest text-sm text-white/80 font-bold">Total</span>
                     <span className="text-xl font-bold">R$ {total.toFixed(2).replace('.', ',')}</span>
                   </div>
                 </div>
                 
                 <Button 
-                  className="w-full h-12 mt-4 bg-black text-white hover:bg-neutral-800" 
+                  className="w-full h-12 mt-4 bg-white text-black hover:bg-white/90 font-semibold" 
                   size="lg" 
                   onClick={handleCheckout}
                   disabled={isCheckingOut}

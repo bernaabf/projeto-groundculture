@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: 'Ground Culture',
     images: [
       {
-        url: '/images/hero-bg.jpg',
+        url: '/images/hero-banner.jpg',
         width: 1200,
         height: 630,
         alt: 'Ground Culture',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Ground Culture',
     description: "Referência em rashguards e fightwear para quem vive o Jiu-Jitsu No-Gi.",
-    images: ['/images/hero-bg.jpg'],
+    images: ['/images/hero-banner.jpg'],
   },
 };
 
@@ -49,7 +49,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "Ground Culture",
     url: "https://groundculture.com.br",
-    logo: "https://groundculture.com.br/images/hero-bg.jpg",
+    logo: "https://groundculture.com.br/images/hero-banner.jpg",
     sameAs: [
       "https://instagram.com/groundculture.store"
     ]

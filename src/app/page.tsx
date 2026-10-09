@@ -32,7 +32,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <motion.div style={{ y: y1, opacity }} className="absolute inset-0 w-full h-full">
             <Image
-              src="/images/hero-bg.jpg"
+              src="/images/hero-banner.jpg"
               alt="Ground Culture Rashguard"
               fill
               sizes="100vw"
@@ -48,8 +48,8 @@ export default function Home() {
         <div className="relative z-10 container mx-auto px-6 lg:px-12 w-full text-center flex flex-col items-center">
           <div className="max-w-5xl mx-auto">
             <LetteringText 
-              text="Performance Jiu-Jitsu"
-              className="text-6xl md:text-8xl lg:text-[10rem] font-display font-medium tracking-tighter leading-[0.9] text-white justify-center"
+              text="Premium Fightwear"
+              className="text-5xl md:text-8xl lg:text-[9rem] font-display font-medium tracking-tighter leading-[0.9] text-white justify-center"
             />
             
             <div className="mt-12 flex flex-col items-center gap-8">
@@ -59,7 +59,7 @@ export default function Home() {
                 transition={{ duration: 1, delay: 1 }}
                 className="text-xl md:text-2xl font-light text-white/80 max-w-2xl mx-auto text-balance"
               >
-                Rashguards e fightwear de alta qualidade para quem vive no tatame. Desenvolvido para campeões.
+                Equipamentos de alta performance para quem respira Jiu-Jitsu e Submission. Desenvolvidos para suportar as batalhas mais duras no tatame.
               </motion.p>
               
               <motion.div
@@ -159,40 +159,65 @@ export default function Home() {
       {/* Editorial Manifesto */}
       <section className="py-40 bg-bgSecondary border-t border-borderPrimary relative overflow-hidden">
         <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
-            <div className="md:col-span-7">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Imagem de Cultura (Segunda Foto) */}
+            <div className="md:col-span-5 order-2 md:order-1">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden border border-white/10"
+              >
+                <Image 
+                  src="/images/camo-rashguard.jpg" 
+                  alt="Ground Culture Camo Rashguard Lifestyle" 
+                  fill 
+                  className="object-cover"
+                />
+              </motion.div>
+            </div>
+
+            {/* Texto de Cultura */}
+            <div className="md:col-span-7 order-1 md:order-2">
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8 }}
               >
-                <h2 className="text-5xl md:text-7xl font-display font-medium tracking-tighter leading-[1.05] mb-12">
-                  Não é apenas roupa.<br />Armadura que nutre<br />corpo e alma.
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-display font-medium tracking-tighter leading-[1.05] mb-8">
+                  A verdadeira essência <br className="hidden md:block" /> da cultura No-Gi.
                 </h2>
               </motion.div>
-            </div>
-            <div className="md:col-span-5 flex flex-col justify-end">
+              
               <motion.p
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-xl text-white/60 font-light leading-relaxed mb-12"
+                className="text-xl md:text-2xl text-white/60 font-light leading-relaxed mb-12"
               >
-                A Ground Culture une a facilidade de compra com a estética de uma revista editorial. Descubra coleções exclusivas e evolua sem limites.
+                Nossa marca nasceu no tatame. Combinamos estética impecável com durabilidade extrema. Cada rashguard é construída para ser sua segunda pele, te dando o suporte e a confiança que você exige. <strong className="text-white font-medium">Vista a sua armadura.</strong>
               </motion.p>
               
-              <div className="flex gap-16">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="flex gap-12 lg:gap-16"
+              >
                 <div>
-                  <div className="text-4xl font-display font-medium">100+</div>
-                  <div className="text-sm font-bold uppercase tracking-widest text-white/40 mt-2">Rashguards Vendidas</div>
+                  <div className="text-4xl lg:text-5xl font-display font-medium">Design</div>
+                  <div className="text-xs lg:text-sm font-bold uppercase tracking-widest text-white/40 mt-2">Exclusivo & Minimalista</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-display font-medium">100%</div>
-                  <div className="text-sm font-bold uppercase tracking-widest text-white/40 mt-2">Qualidade Premium</div>
+                  <div className="text-4xl lg:text-5xl font-display font-medium">Performance</div>
+                  <div className="text-xs lg:text-sm font-bold uppercase tracking-widest text-white/40 mt-2">Materiais Premium</div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
