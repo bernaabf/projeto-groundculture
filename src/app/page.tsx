@@ -7,77 +7,16 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import ProductCard from "@/components/ui/ProductCard";
 import { storeData } from "@/lib/data";
-import { LetteringText } from "@/components/ui/LetteringText";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import GroundCultureScrollExperience from "@/components/experience/GroundCultureScrollExperience";
 
 export default function Home() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
   const featuredProducts = storeData.products.slice(0, 3); // showing 3 for grid symmetry
 
   return (
     <div className="bg-bgPrimary text-white font-sans">
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-bgPrimary"
-      >
-        <div className="absolute inset-0 z-0">
-          <motion.div style={{ y: y1, opacity }} className="absolute inset-0 w-full h-full">
-            <Image
-              src="/images/hero-banner.jpg"
-              alt="Ground Culture Rashguard"
-              fill
-              sizes="100vw"
-              quality={90}
-              className="object-cover object-center opacity-70"
-              priority
-            />
-            {/* Dark overlay for contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-bgPrimary via-bgPrimary/50 to-bgPrimary/20" />
-          </motion.div>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-6 lg:px-12 w-full text-center flex flex-col items-center">
-          <div className="max-w-5xl mx-auto">
-            <LetteringText 
-              text="Premium Fightwear"
-              className="text-5xl md:text-8xl lg:text-[9rem] font-display font-medium tracking-tighter leading-[0.9] text-white justify-center"
-            />
-            
-            <div className="mt-12 flex flex-col items-center gap-8">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1 }}
-                className="text-xl md:text-2xl font-light text-white/80 max-w-2xl mx-auto text-balance"
-              >
-                Equipamentos de alta performance para quem respira Jiu-Jitsu e Submission. Desenvolvidos para suportar as batalhas mais duras no tatame.
-              </motion.p>
-              
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
-                className="flex gap-4"
-              >
-                <Link href="/produtos">
-                  <Button size="lg" variant="primary" className="bg-white text-bgPrimary hover:bg-white/90 gap-2">
-                    Explorar Coleção
-                  </Button>
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 3D Scroll Experience (Hero) */}
+      <GroundCultureScrollExperience />
 
       {/* Grid Features Layout (Inspired by Vita Travels) */}
       <section className="py-24 border-t border-borderPrimary bg-bgPrimary overflow-hidden">
