@@ -1,0 +1,60 @@
+.experience { position: relative; height: 400svh; background: #0b0f12; isolation: isolate; }
+.stage { position: sticky; top: 0; height: 100svh; min-height: 620px; overflow: hidden; display: grid; grid-template-columns: 44% 56%; align-items: center; padding: 100px max(24px, 5vw) 88px; }
+.copy { position: relative; z-index: 2; max-width: 570px; pointer-events: none; }
+.copy h1 { font-size: clamp(58px, 6.7vw, 110px); line-height: .92; margin: 0 0 30px; }
+.copy p { max-width: 400px; color: #b6babd; font-size: clamp(16px, 1.3vw, 20px); font-weight: 300; line-height: 1.65; margin-bottom: 30px; }
+.primary { display: inline-flex; justify-content: center; align-items: center; gap: 30px; min-height: 56px; padding: 12px 28px; border-radius: 999px; background: white; color: #0b0f12; font-weight: 500; pointer-events: auto; }
+.primary:hover { background: #e9ebec; }
+.secondary { display: block; width: fit-content; margin-top: 18px; padding: 8px 0; font-size: 13px; color: #b6babd; pointer-events: auto; }
+.secondary:hover { color: white; }
+.primary:focus-visible,.secondary:focus-visible,.skip:focus-visible { outline: 2px solid white; outline-offset: 5px; }
+.visual { position: absolute; top: 85px; bottom: 65px; right: 1%; width: 58%; pointer-events: none; }
+.halo { position: absolute; inset: 6% 2%; background: radial-gradient(ellipse at center, #26313c85, transparent 67%); }
+.poster { position: absolute; inset: 0; opacity: 1; }
+.poster[data-hidden="true"] { opacity: 0; visibility: hidden; }
+.posterImage { object-fit: contain; mask-image: radial-gradient(ellipse, black 38%, transparent 73%); }
+.caption { position: absolute; bottom: 30px; left: max(24px, 5vw); right: max(24px, 5vw); display: flex; align-items: center; gap: 18px; color: #a8adb2; font-size: 12px; }
+.ranks { display: flex; gap: 5px; }
+.ranks span { width: 27px; height: 5px; border: 1px solid #ffffff30; border-radius: 1px; }
+.rank { min-width: 46px; }
+.skip { margin-left: auto; padding: 10px 0; }
+.skip span { padding-left: 18px; }
+.destination { scroll-margin-top: 110px; }
+.experience[data-static="true"] { height: auto; }
+.experience[data-static="true"] .stage { position: relative; }
+.experience[data-static="true"] .rank { display: none; }
+@media (max-width: 1023px) and (min-width: 768px) {
+  .stage { grid-template-columns: 48% 52%; padding-left: 30px; }
+  .copy h1 { font-size: 68px; }
+  .visual { width: 55%; right: -2%; }
+  .copy p { max-width: 320px; }
+}
+@media (max-width: 767px) {
+  .experience { height: 300svh; }
+  .stage { display: block; min-height: 0; padding: 112px 24px 60px; }
+  .copy { max-width: 440px; }
+  .copy h1 { font-size: clamp(44px, 11vw, 60px); margin-bottom: 16px; }
+  .experience[data-static="true"] .stage { min-height: 700px; }
+  .copy p { font-size: 14px; line-height: 1.5; max-width: 370px; margin-bottom: 18px; }
+  .primary { min-height: 46px; padding: 10px 22px; font-size: 14px; gap: 22px; }
+  .secondary { display: inline-block; margin: 0 0 0 12px; font-size: 11px; max-width: 110px; vertical-align: middle; }
+  .visual { top: 340px; bottom: 55px; width: 100%; right: 0; }
+  .caption { bottom: 16px; left: 24px; right: 24px; gap: 10px; font-size: 10px; }
+  .ranks { gap: 3px; }
+  .ranks span { width: 18px; }
+  .skip span { padding-left: 6px; }
+}
+@media (max-height: 699px) and (min-width: 768px) {
+  .stage { min-height: 520px; padding-top: 100px; }
+  .copy h1 { font-size: 58px; margin-bottom: 18px; }
+  .copy p { font-size: 14px; margin-bottom: 18px; }
+  .secondary { margin-top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experience { height: auto; }
+  .stage { position: relative; }
+  .rank { display: none; }
+}
+
+@media (max-width: 360px) { .visual { top: 372px; } .secondary { margin-left: 8px; max-width: 92px; } }
+@media (max-width: 360px) { .primary { gap: 12px; padding: 10px 16px; font-size: 13px; } }
